@@ -43,7 +43,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "twrautoupdate",
+                "Specification-Title"     : "autoupdate",
                 "Specification-Vendor"    : "khjxiaogu",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
@@ -52,7 +52,7 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-    archiveName "twrautoupdate.jar"
+    archiveName "autoupdate.jar"
 }
 
 // Prevent Mixin annotation processor from getting into IDEA's annotation processor settings
