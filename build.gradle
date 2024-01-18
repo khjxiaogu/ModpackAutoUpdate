@@ -13,9 +13,9 @@ plugins {
     id 'idea'
 }
 
-archivesBaseName = 'TWRAutoUpdate'
-group = 'com.teammoeg'
-version = '0.4.5-rc1'
+archivesBaseName = 'ModPackAutoUpdate'
+group = 'com.khjxiaogu'
+version = '0.0.1'
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
