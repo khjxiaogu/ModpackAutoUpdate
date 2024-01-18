@@ -1,0 +1,66 @@
+buildscript {
+    repositories {
+        mavenLocal()
+       
+        mavenCentral()
+    }
+}
+
+
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+}
+
+archivesBaseName = 'TWRAutoUpdate'
+group = 'com.teammoeg'
+version = '0.4.5-rc1'
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
+}
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+ mavenLocal()
+ maven { url = 'https://maven.minecraftforge.net' }
+ mavenCentral()
+}
+
+dependencies {
+
+    implementation group: 'net.minecraftforge', name: 'forgespi', version: '3.2.0'
+    implementation group: 'cpw.mods', name: 'modlauncher', version: '8.0.6'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation "net.minecrell:terminalconsoleappender:1.2.0"
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "twrautoupdate",
+                "Specification-Vendor"    : "khjxiaogu",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "khjxiaogu",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+    archiveName "twrautoupdate.jar"
+}
+
+// Prevent Mixin annotation processor from getting into IDEA's annotation processor settings
+// Copied from Botania
+if (System.getProperty("idea.sync.active") == "true") {
+    afterEvaluate {
+        tasks.withType(JavaCompile).all {
+            it.options.annotationProcessorPath = files()
+        }
+    }
+}
